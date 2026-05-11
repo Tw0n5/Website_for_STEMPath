@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STEMPath — Your Career, Optimized</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+--bg:             #07070f;
+    --bg-mid:         #0e0e1c;
+    --bg-card:        rgba(18, 14, 40, 0.78);
+    --bg-card-solid:  #120e28;
+    --surface2:       rgba(169, 141, 208, 0.18);
+
+    --purple:         #9b59f5;
+    --purple-light:   #c084fc;
+    --purple-dim:     #6d28d9;
+    --purple-glow:    rgba(155, 89, 245, 0.18);
+    --purple-border:  rgba(155, 89, 245, 0.28);
+
+    --cyan:           #22d3ee; /* Replacing teal with cyan */
+    --amber:          #f0a500;
+    --white:          #f0f4ff;
+    --text:           #ede9fe;
+    --text-secondary: #c4b5fd;
+    --muted:          #7c6fa0;
+    --border:         rgba(155, 89, 245, 0.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.6;
+    /* Adding the mesh background from style.css */
+    background-image: 
+      radial-gradient(ellipse 80% 55% at 20% -5%,  rgba(109,40,217,0.2)  0%, transparent 55%),
+      radial-gradient(ellipse 60% 45% at 80% 105%, rgba(34,211,238,0.08) 0%, transparent 55%);
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 5%;
+    background: rgba(7, 7, 15, 0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.3rem;
+    color: var(--purple-light);
+    letter-spacing: -0.03em;
+  }
+  .nav-logo span { color: var(--white); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.88rem; font-weight: 500; letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--purple-light); }
+  .nav-cta {
+    background: var(--teal); color: var(--bg) !important;
+    padding: 0.5rem 1.3rem; border-radius: 4px;
+    font-weight: 600 !important;
+  }
+  .nav-cta:hover { background: #6d28d9 !important; color: var(--bg) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 8rem 5% 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  canvas#graph-canvas {
+    position: absolute; inset: 0; z-index: 0;
+    opacity: 0.55;
+  }
+
+  .hero-gradient {
+    position: absolute; inset: 0; z-index: 1;
+    background: radial-gradient(ellipse 70% 60% at 60% 40%, rgba(0,212,180,0.07) 0%, transparent 70%),
+                radial-gradient(ellipse 70% 60% at 60% 40%, rgba(155, 89, 245, 0.1) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 50% at 20% 80%, rgba(240,165,0,0.05) 0%, transparent 60%);
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 680px;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--purple-glow); border: 1px solid var(--purple-border);
+    color: var(--purple-light); padding: 0.35rem 0.9rem; border-radius: 20px;
+    font-size: 0.78rem; font-family: 'Space Mono', monospace;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 1.8rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-badge::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--purple-light);
+    animation: pulse 1.5s infinite;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  h1 em {
+    font-style: normal;
+    background: linear-gradient(110deg, var(--purple-light) 0%, var(--cyan) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 1.12rem; color: #9aadc7; font-weight: 300;
+    max-width: 520px; margin-bottom: 2.5rem; line-height: 1.75;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--purple-dim), var(--purple)); 
+    color: #fff !important;
+    padding: 0.85rem 2rem; border-radius: 5px;
+    font-weight: 700; font-size: 0.95rem; text-decoration: none;
+    transition: all 0.2s; letter-spacing: 0.01em;
+    box-shadow: 0 4px 18px rgba(155,89,245,0.35);
+  }
+  .btn-primary:hover { background: #6d28d9; transform: translateY(-2px); box-shadow: 0 0 36px rgba(155,89,245,0.45); }
+
+  .btn-secondary {
+    border: 1px solid var(--border); color: var(--muted);
+    padding: 0.85rem 2rem; border-radius: 5px;
+    font-weight: 500; font-size: 0.95rem; text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--cyan); color: var(--#22d3ee); }
+
+  .hero-stats {
+    position: absolute; right: 5%; top: 50%; transform: translateY(-50%);
+    z-index: 2; display: flex; flex-direction: column; gap: 1.5rem;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+  .stat-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.4rem 1.8rem; text-align: center;
+    backdrop-filter: blur(10px);
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem; font-weight: 900; color: var(--purple-light);
+    line-height: 1;
+  }
+  .stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 0.35rem; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* ── SECTIONS ── */
+  section { padding: 7rem 5%; }
+
+  .section-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem; text-transform: uppercase;
+    letter-spacing: 0.12em; color: var(--purple-light);
+    margin-bottom: 0.9rem;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900; line-height: 1.15;
+    letter-spacing: -0.015em; margin-bottom: 1rem;
+  }
+
+  .lead { font-size: 1.05rem; color: #8fa0bb; max-width: 560px; line-height: 1.8; }
+
+  /* ── WHAT ── */
+  .what-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: center; margin-top: 4rem;
+  }
+  .what-visual {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .what-visual::before {
+    content: '';
+    position: absolute; top: -40px; right: -40px;
+    width: 180px; height: 180px;
+    background: radial-gradient(circle, rgba(0,212,180,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .path-demo { display: flex; flex-direction: column; gap: 0.6rem; }
+  .path-step {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 0.85rem 1rem;
+    background: var(--surface2); border-radius: 8px;
+    border-left: 3px solid transparent;
+    font-size: 0.9rem; transition: all 0.3s;
+    animation: stepReveal 0.5s ease both;
+  }
+  .path-step:nth-child(1) { animation-delay: 0.1s; border-color: var(--purple-light); }
+  .path-step:nth-child(2) { animation-delay: 0.3s; border-color: #00a8e8; }
+  .path-step:nth-child(3) { animation-delay: 0.5s; border-color: var(--amber); }
+  .path-step:nth-child(4) { animation-delay: 0.7s; border-color: var(--purple-light); }
+  .step-icon { font-size: 1.1rem; width: 30px; text-align: center; }
+  .step-text { flex: 1; }
+  .step-title { font-weight: 600; color: var(--white); font-size: 0.88rem; }
+  .step-meta { font-size: 0.75rem; color: var(--muted); }
+  .step-badge { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--purple-light); background: var(--purple-dim); padding: 0.2rem 0.5rem; border-radius: 3px; }
+
+  .connector { width: 2px; height: 14px; background: linear-gradient(to bottom, var(--border), transparent); margin-left: 24px; }
+
+  /* ── HOW ── */
+  .how-section { background: var(--surface); }
+  .steps-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem; margin-top: 4rem;
+    position: relative;
+  }
+  .steps-grid::before {
+    content: '';
+    position: absolute; top: 28px; left: 12.5%; right: 12.5%; height: 1px;
+    background: linear-gradient(to right, transparent, var(--border), var(--purple-light), var(--border), transparent);
+    z-index: 0;
+  }
+  .step-card {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 12px; padding: 2rem 1.5rem; position: relative;
+    text-align: center;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  }
+  .step-card:hover { transform: translateY(-6px); border-color: var(--purple-light); box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(155,89,245,0.08); }
+  .step-num {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--surface2); border: 2px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 1rem; font-weight: 700; color: var(--purple-light);
+    margin: 0 auto 1.3rem; position: relative; z-index: 1;
+  }
+  .step-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.6rem; }
+  .step-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+
+  /* ── WHY ── */
+  .why-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; margin-top: 4rem;
+  }
+  .why-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 2.2rem;
+    transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .why-card::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 3px; background: linear-gradient(to right, var(--purple-light), #c084fc);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .why-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+  .why-card:hover::after { transform: scaleX(1); }
+  .why-icon { font-size: 2rem; margin-bottom: 1.2rem; }
+  .why-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.7rem; }
+  .why-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+  .why-card .tag { display: inline-block; margin-top: 1rem; font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--amber); background: rgba(240,165,0,0.1); padding: 0.2rem 0.6rem; border-radius: 3px; letter-spacing: 0.05em; }
+
+  /* ── QUOTE ── */
+  .quote-section {
+    background: var(--surface);
+    text-align: center;
+    padding: 6rem 5%;
+  }
+  .quote-block {
+    max-width: 780px; margin: 0 auto;
+  }
+  .quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem; line-height: 0.7; color: var(--purple-light);
+    opacity: 0.4; margin-bottom: 0.5rem;
+  }
+  .quote-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 700; line-height: 1.45;
+    color: var(--white); margin-bottom: 1.5rem;
+  }
+  .quote-source { font-size: 0.82rem; color: var(--muted); font-family: 'Space Mono', monospace; letter-spacing: 0.06em; text-transform: uppercase; }
+
+  /* ── ALGO ── */
+  .algo-section { padding: 7rem 5%; }
+  .algo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-top: 4rem; }
+  .algo-text h2 { margin-bottom: 1.2rem; }
+  .algo-text p { color: #8fa0bb; font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.5rem; }
+  .algo-pill {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 6px; padding: 0.6rem 1rem;
+    font-family: 'Space Mono', monospace; font-size: 0.78rem;
+    color: var(--purple-light); margin-right: 0.5rem; margin-bottom: 0.5rem;
+  }
+  .algo-visual {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 2rem; font-family: 'Space Mono', monospace;
+    font-size: 0.78rem; color: #5d7a9a; line-height: 1.9;
+    position: relative; overflow: hidden;
+  }
+  .algo-visual::before {
+    content: '// dijkstra_path.py';
+    display: block; color: var(--muted); margin-bottom: 1rem;
+    font-size: 0.72rem;
+  }
+  .code-kw { color: #e06c75; }
+  .code-fn { color: #61afef; }
+  .code-str { color: var(--purple-light); }
+  .code-num { color: var(--amber); }
+  .code-cm { color: #4d6080; }
+
+  /* ── CTA ── */
+  .cta-section {
+    text-align: center; padding: 8rem 5%;
+    position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(155,89,245,0.06) 0%, transparent 70%);
+  }
+  .cta-section h2 { position: relative; z-index: 1; max-width: 600px; margin: 0 auto 1.2rem; }
+  .cta-section p { color: var(--muted); position: relative; z-index: 1; max-width: 480px; margin: 0 auto 2.5rem; }
+  .cta-section .btn-primary { position: relative; z-index: 1; display: inline-block; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 0.82rem; color: var(--muted);
+  }
+  .footer-logo { font-family: 'Space Mono', monospace; color: var(--purple-light); font-size: 1rem; }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--purple-light); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+  }
+  @keyframes stepReveal {
+    from { opacity: 0; transform: translateX(-10px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    .what-grid, .algo-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .why-grid { grid-template-columns: 1fr 1fr; }
+    .steps-grid { grid-template-columns: 1fr 1fr; }
+    .steps-grid::before { display: none; }
+    .hero-stats { display: none; }
+  }
+  @media (max-width: 600px) {
+    .why-grid { grid-template-columns: 1fr; }
+    .steps-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">STEM<span>Path</span></div>
+  <ul class="nav-links">
+    <li><a href="#what">What It Is</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#why">Why Use It</a></li>
+    <li><a href="https://github.com/ruthbak/STEMPath.git" target="_blank" class="nav-cta">View on GitHub</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <canvas id="graph-canvas"></canvas>
+  <div class="hero-gradient"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">Caribbean STEM Career Intelligence Platform</div>
+    <h1>Your STEM career,<br><em>optimally mapped.</em></h1>
+    <p class="hero-sub">
+      STEMPath is a smart, data-driven web platform that takes your current skills and draws you the most efficient, affordable, and realistic path to the STEM career you want.
+    </p>
+    <div class="hero-actions">
+      <a href="#what" class="btn-primary">Explore the Platform</a>
+      <a href="https://github.com/ruthbak/STEMPath.git" target="_blank" class="btn-secondary">View Source Code →</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-card">
+      <div class="stat-num">81%</div>
+      <div class="stat-label">Employers now use skills-based hiring</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">900+</div>
+      <div class="stat-label">STEM Occupations mapped via O*NET</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">Dijkstra</div>
+      <div class="stat-label">Shortest-path algorithm powering recommendations</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT -->
+<section id="what" style="padding: 7rem 5%;">
+  <div class="section-tag reveal">01 — What Is STEMPath</div>
+  <h2 class="reveal">A GPS for your career journey.</h2>
+  <p class="lead reveal">Most Caribbean STEM students graduate unsure which skills they're missing, which courses to take next, and how to compete in a skills-first job market. STEMPath solves that — in minutes.</p>
+
+  <div class="what-grid">
+    <div class="reveal">
+      <p style="color:#8fa0bb; margin-bottom:1.5rem; line-height:1.8;">
+        Think of it like Google Maps — but for career development. You tell it <strong style="color:var(--white)">where you are</strong> (your skills, courses, GPA) and <strong style="color:var(--white)">where you want to go</strong> (Software Engineer, Data Scientist, Biomedical Engineer…), and STEMPath calculates the <em style="color:var(--teal); font-style:normal">fastest, cheapest, and most achievable route</em> to get you there.
+      </p>
+      <p style="color:#8fa0bb; margin-bottom:1.5rem; line-height:1.8;">
+        No more sifting through generic job advice. No more wondering if your degree is enough. STEMPath uses real industry data from O*NET, real course catalogs from platforms like edX, and a graph algorithm originally designed for navigation software — applied to your career.
+      </p>
+      <p style="color:#8fa0bb; line-height:1.8;">
+        Built for the Caribbean context, the platform accounts for regional labor markets, financial constraints, and varying educational backgrounds — making it the first career tool truly designed <em style="color:var(--teal); font-style:normal">for students like you</em>.
+      </p>
+    </div>
+
+    <div class="what-visual reveal">
+      <div style="font-family:'Space Mono',monospace; font-size:0.7rem; color:var(--purple-light); margin-bottom:1.2rem; opacity:0.7;">SAMPLE PATHWAY — Data Scientist</div>
+      <div class="path-demo">
+        <div class="path-step">
+          <span class="step-icon">📍</span>
+          <div class="step-text">
+            <div class="step-title">Your Starting Point</div>
+            <div class="step-meta">Python basics · Statistics 1 · Calculus</div>
+          </div>
+          <span class="step-badge">NOW</span>
+        </div>
+        <div class="connector"></div>
+        <div class="path-step">
+          <span class="step-icon">📚</span>
+          <div class="step-text">
+            <div class="step-title">Data Analysis Foundations</div>
+            <div class="step-meta">edX · 6 weeks · Free audit</div>
+          </div>
+          <span class="step-badge">STEP 1</span>
+        </div>
+        <div class="connector"></div>
+        <div class="path-step">
+          <span class="step-icon">🤖</span>
+          <div class="step-text">
+            <div class="step-title">Machine Learning Fundamentals</div>
+            <div class="step-meta">Coursera · 10 weeks · $49</div>
+          </div>
+          <span class="step-badge">STEP 2</span>
+        </div>
+        <div class="connector"></div>
+        <div class="path-step">
+          <span class="step-icon">🎯</span>
+          <div class="step-text">
+            <div class="step-title">Google Data Analytics Certificate</div>
+            <div class="step-meta">Google · Industry-recognized · $200</div>
+          </div>
+          <span class="step-badge">GOAL</span>
+        </div>
+      </div>
+      <div style="margin-top:1.5rem; padding-top:1.2rem; border-top:1px solid var(--purple-dim); display:flex; gap:2rem;">
+        <div>
+          <div style="font-family:'Space Mono',monospace; font-size:1.1rem; color:var(--purple-light);">26 wks</div>
+          <div style="font-size:0.72rem; color:var(--muted);">Total Time</div>
+        </div>
+        <div>
+          <div style="font-family:'Space Mono',monospace; font-size:1.1rem; color:var(--amber);">~$249</div>
+          <div style="font-size:0.72rem; color:var(--muted);">Est. Cost</div>
+        </div>
+        <div>
+          <div style="font-family:'Space Mono',monospace; font-size:1.1rem; color:var(--purple-light);">94%</div>
+          <div style="font-size:0.72rem; color:var(--muted);">Skill Coverage</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section id="how" class="how-section">
+  <div class="section-tag reveal">02 — How It Works</div>
+  <h2 class="reveal">From profile to pathway in four steps.</h2>
+  <p class="lead reveal">No complicated setup. Just tell STEMPath about yourself, and let the algorithm do the heavy lifting.</p>
+
+  <div class="steps-grid">
+    <div class="step-card reveal">
+      <div class="step-num">01</div>
+      <h3>Create Your Profile</h3>
+      <p>Register and enter your degree, completed courses, certifications, and current skills. Or simply upload your résumé — the system extracts your skills automatically.</p>
+    </div>
+    <div class="step-card reveal" style="transition-delay:0.1s">
+      <div class="step-num">02</div>
+      <h3>Choose Your Target Career</h3>
+      <p>Browse 900+ STEM occupations — from Cybersecurity Analyst to Biomedical Engineer. Filter by category, search by keyword, and select the role you're aiming for.</p>
+    </div>
+    <div class="step-card reveal" style="transition-delay:0.2s">
+      <div class="step-num">03</div>
+      <h3>Take the Proficiency Quiz</h3>
+      <p>Answer 6 targeted questions about your chosen career's foundational skills. Your score determines your starting node in the learning graph — beginner or intermediate.</p>
+    </div>
+    <div class="step-card reveal" style="transition-delay:0.3s">
+      <div class="step-num">04</div>
+      <h3>Get Your Optimal Pathway</h3>
+      <p>Dijkstra's algorithm computes the shortest, cheapest, or most balanced route from where you are to where you want to be. Visualize, save, export, and track your progress.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ALGO DETAIL -->
+<section class="algo-section" id="algo">
+  <div class="algo-grid">
+    <div class="algo-visual reveal">
+<span class="code-cm"># Weighted graph: skills as nodes, courses as edges</span>
+<span class="code-kw">def</span> <span class="code-fn">compute_pathway</span>(user_skills, target_career, mode):
+
+  graph = <span class="code-fn">build_graph</span>(skills, courses)
+
+  <span class="code-cm"># Assign edge weights by optimization mode</span>
+  <span class="code-kw">if</span> mode == <span class="code-str">'time'</span>:
+    weights = [c.duration <span class="code-kw">for</span> c <span class="code-kw">in</span> courses]
+  <span class="code-kw">elif</span> mode == <span class="code-str">'cost'</span>:
+    weights = [c.price <span class="code-kw">for</span> c <span class="code-kw">in</span> courses]
+  <span class="code-kw">else</span>: <span class="code-cm"># balanced</span>
+    weights = <span class="code-fn">multi_criteria</span>(time, cost, difficulty)
+
+  source = <span class="code-fn">map_user_node</span>(user_skills)
+  target = <span class="code-fn">map_career_node</span>(target_career)
+
+  <span class="code-cm"># Dijkstra: O((V + E) log V)</span>
+  <span class="code-kw">return</span> <span class="code-fn">dijkstra</span>(graph, source, target, weights)
+    </div>
+    <div class="algo-text reveal" style="transition-delay:0.15s">
+      <div class="section-tag">Under the Hood</div>
+      <h2>The Science Behind the Suggestion</h2>
+      <p>STEMPath isn't guessing. It models your career journey as a <strong style="color:var(--white)">weighted directed graph</strong> — a mathematical structure used in mapping, logistics, and network routing — and applies <strong style="color:var(--white)">Dijkstra's shortest-path algorithm</strong> to find your optimal route.</p>
+      <p>Skills and certifications are <strong style="color:var(--white)">nodes</strong>. Courses are <strong style="color:var(--white)">edges</strong>. Time, cost, and difficulty are <strong style="color:var(--white)">weights</strong>. You choose how to optimize, and the algorithm guarantees the mathematically best path.</p>
+      <div style="margin-top:1.5rem;">
+        <span class="algo-pill">⚙ Dijkstra's Algorithm</span>
+        <span class="algo-pill">🗂 O*NET Taxonomy</span>
+        <span class="algo-pill">🌐 edX / Coursera Data</span>
+        <span class="algo-pill">🐍 Python + Flask</span>
+        <span class="algo-pill">📊 Skills Graph</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why" style="background: var(--surface); padding: 7rem 5%;">
+  <div style="text-align:center; margin-bottom:1rem;" class="reveal">
+    <div class="section-tag" style="justify-content:center; display:block;">03 — Why Use STEMPath</div>
+    <h2>Built for students who can't afford to waste time.</h2>
+    <p class="lead" style="margin: 0.8rem auto 0; text-align:center;">Career uncertainty is expensive. STEMPath gives you clarity, direction, and a plan — before you spend a single dollar on a course that doesn't move you forward.</p>
+  </div>
+
+  <div class="why-grid">
+    <div class="why-card reveal">
+      <div class="why-icon">🎯</div>
+      <h3>Personalized, Not Generic</h3>
+      <p>Forget one-size-fits-all advice. STEMPath analyzes your specific profile — your GPA, your completed courses, your skills — and builds a pathway unique to you, not a template for everyone.</p>
+      <span class="tag">PERSONALIZATION</span>
+    </div>
+    <div class="why-card reveal" style="transition-delay:0.1s">
+      <div class="why-icon">💰</div>
+      <h3>Optimize for What Matters to You</h3>
+      <p>Short on time? Minimize the number of weeks. Tight on budget? Find the free or cheapest route. Worried about difficulty? Get the most balanced path. You choose the trade-offs.</p>
+      <span class="tag">SMART OPTIMIZATION</span>
+    </div>
+    <div class="why-card reveal" style="transition-delay:0.2s">
+      <div class="why-icon">🌍</div>
+      <h3>Built for the Caribbean</h3>
+      <p>Most career tools are designed for North American or European markets. STEMPath specifically accounts for Caribbean educational pathways, regional job markets, and local financial realities.</p>
+      <span class="tag">REGIONAL CONTEXT</span>
+    </div>
+    <div class="why-card reveal" style="transition-delay:0.1s">
+      <div class="why-icon">📡</div>
+      <h3>Aligned with How Hiring Actually Works</h3>
+      <p>Over 81% of employers now prioritize skills over degrees. STEMPath maps directly to those skills using O*NET occupational data — the same database used by major employers and HR platforms worldwide.</p>
+      <span class="tag">SKILLS-BASED HIRING</span>
+    </div>
+    <div class="why-card reveal" style="transition-delay:0.2s">
+      <div class="why-icon">📈</div>
+      <h3>Track and Adapt as You Grow</h3>
+      <p>Mark courses as complete, watch your pathway progress percentage rise, and update your profile as you acquire new skills. STEMPath grows with you — not just a one-time report.</p>
+      <span class="tag">PROGRESS TRACKING</span>
+    </div>
+    <div class="why-card reveal" style="transition-delay:0.3s">
+      <div class="why-icon">🔍</div>
+      <h3>Transparent Recommendations</h3>
+      <p>STEMPath never gives you a black-box result. Every recommendation is explainable — you see exactly why each course appears in your pathway and what skill gap it closes.</p>
+      <span class="tag">EXPLAINABLE AI</span>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div class="quote-section reveal">
+  <div class="quote-block">
+    <div class="quote-mark">"</div>
+    <p class="quote-text">Over 81% of employers now use skills-based hiring to prioritize competencies over credentials alone — yet most Caribbean students are left to navigate career planning alone, with fragmented information and no structured guidance.</p>
+    <p class="quote-source">— TestGorilla &amp; Burning Glass Institute, 2024 · The context STEMPath was built to solve</p>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="section-tag reveal" style="display:block; text-align:center;">Get Started</div>
+  <h2 class="reveal">Ready to find your path?</h2>
+  <p class="reveal">STEMPath is free to explore. Build your profile, browse careers, and generate your first personalized learning pathway — in under 10 minutes.</p>
+  <a href="https://github.com/ruthbak/STEMPath.git" target="_blank" class="btn-primary reveal">Explore on GitHub →</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">STEMPath</div>
+  <div>Built by Rashene Dillon · Ruth Bakare · Antwon Fonglyewquee · Shari Oliver &nbsp;·&nbsp; UWI Mona, 2024</div>
+  <div>Supervised by Mr. Matthew Stone &nbsp;·&nbsp; <a href="https://github.com/ruthbak/STEMPath.git" target="_blank">GitHub ↗</a></div>
+</footer>
+
+<!-- GRAPH CANVAS ANIMATION -->
+<script>
+const canvas = document.getElementById('graph-canvas');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', () => { resize(); initNodes(); });
+
+const TEAL = '#00d4b4';
+const AMBER = '#f0a500';
+const BLUE = '#00a8e8';
+let nodes = [];
+let edges = [];
+const NODE_COUNT = 40;
+
+function initNodes() {
+  nodes = [];
+  edges = [];
+  for (let i = 0; i < NODE_COUNT; i++) {
+    nodes.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      r: Math.random() * 2.5 + 1.2,
+      color: [TEAL, AMBER, BLUE][Math.floor(Math.random() * 3)],
+      pulse: Math.random() * Math.PI * 2
+    });
+  }
+}
+initNodes();
+
+function draw(t) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Update positions
+  nodes.forEach(n => {
+    n.x += n.vx; n.y += n.vy;
+    if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+    if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+    n.pulse += 0.015;
+  });
+
+  // Draw edges
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      const dx = nodes[i].x - nodes[j].x;
+      const dy = nodes[i].y - nodes[j].y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if (dist < 140) {
+        const alpha = (1 - dist/140) * 0.18;
+        ctx.beginPath();
+        ctx.moveTo(nodes[i].x, nodes[i].y);
+        ctx.lineTo(nodes[j].x, nodes[j].y);
+        ctx.strokeStyle = `rgba(0,212,180,${alpha})`;
+        ctx.lineWidth = 0.7;
+        ctx.stroke();
+      }
+    }
+  }
+
+  // Draw nodes
+  nodes.forEach(n => {
+    const pulse = Math.sin(n.pulse) * 0.4 + 1;
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, n.r * pulse, 0, Math.PI * 2);
+    ctx.fillStyle = n.color;
+    ctx.globalAlpha = 0.7;
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  });
+
+  requestAnimationFrame(draw);
+}
+requestAnimationFrame(draw);
+
+// REVEAL on scroll
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); }
+  });
+}, { threshold: 0.12 });
+reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
