@@ -189,6 +189,7 @@
 
   h2 {
     font-family: 'Playfair Display', serif;
+    font-variant-numeric: lining-nums;
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 900; line-height: 1.15;
     letter-spacing: -0.015em; margin-bottom: 1rem;
@@ -226,10 +227,10 @@
     font-size: 0.9rem; transition: all 0.3s;
     animation: stepReveal 0.5s ease both;
   }
-  .path-step:nth-child(1) { animation-delay: 0.1s; border-color: var(--purple-light); }
-  .path-step:nth-child(2) { animation-delay: 0.3s; border-color: #00a8e8; }
-  .path-step:nth-child(3) { animation-delay: 0.5s; border-color: var(--amber); }
-  .path-step:nth-child(4) { animation-delay: 0.7s; border-color: var(--purple-light); }
+  .path-step:nth-child(1) { animation-delay: 0.1s;  }
+  .path-step:nth-child(2) { animation-delay: 0.3s;  }
+  .path-step:nth-child(3) { animation-delay: 0.5s; }
+  .path-step:nth-child(4) { animation-delay: 0.7s; }
   .step-icon { font-size: 1.1rem; width: 30px; text-align: center; }
   .step-text { flex: 1; }
   .step-title { font-weight: 600; color: var(--white); font-size: 0.88rem; }
@@ -248,7 +249,7 @@
   .steps-grid::before {
     content: '';
     position: absolute; top: 28px; left: 12.5%; right: 12.5%; height: 1px;
-    background: linear-gradient(to right, transparent, var(--border), var(--purple-light), var(--border), transparent);
+    background: linear-gradient(to right, transparent, var(--border), var(--border), var(--border), transparent);
     z-index: 0;
   }
   .step-card {
@@ -259,11 +260,11 @@
   }
   .step-card:hover { transform: translateY(-6px); border-color: var(--purple-light); box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(155,89,245,0.08); }
   .step-num {
-    width: 56px; height: 56px; border-radius: 50%;
+    width: 64px; height: 64px; border-radius: 50%;
     background: var(--surface2); border: 2px solid var(--border);
     display: flex; align-items: center; justify-content: center;
     font-family: 'Space Mono', monospace;
-    font-size: 1rem; font-weight: 700; color: var(--purple-light);
+    font-size: 1.85rem; font-weight: 700; color: var(--purple-light);
     margin: 0 auto 1.3rem; position: relative; z-index: 1;
   }
   .step-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.6rem; }
@@ -425,7 +426,7 @@
     <div class="hero-badge">Caribbean STEM Career Intelligence Platform</div>
     <h1>Your STEM career,<br><em>optimally mapped.</em></h1>
     <p class="hero-sub">
-      STEMPath is a smart, data-driven web platform that takes your current skills and draws you the most efficient, affordable, and realistic path to the STEM career you want.
+      STEMPath is an intelligent web-based platform that takes your current skills and constructs the most efficient, affordable, and realistic path to your desired STEM career.
     </p>
     <div class="hero-actions">
       <a href="#what" class="btn-primary">Explore the Platform</a>
@@ -453,72 +454,85 @@
 <section id="what" style="padding: 7rem 5%;">
   <div class="section-tag reveal">01 — What Is STEMPath</div>
   <h2 class="reveal">A GPS for your career journey.</h2>
-  <p class="lead reveal">Most Caribbean STEM students graduate unsure which skills they're missing, which courses to take next, and how to compete in a skills-first job market. STEMPath solves that — in minutes.</p>
+  <p class="lead reveal">Most Caribbean STEM students and early-career professionals are unsure which skills they are missing, which courses to take next, and how to compete in a skills-first job market. STEMPath solves that problem in minutes!</p>
 
   <div class="what-grid">
     <div class="reveal">
       <p style="color:#8fa0bb; margin-bottom:1.5rem; line-height:1.8;">
-        Think of it like Google Maps — but for career development. You tell it <strong style="color:var(--white)">where you are</strong> (your skills, courses, GPA) and <strong style="color:var(--white)">where you want to go</strong> (Software Engineer, Data Scientist, Biomedical Engineer…), and STEMPath calculates the <em style="color:var(--teal); font-style:normal">fastest, cheapest, and most achievable route</em> to get you there.
+        Think of it like Google Maps, but for career development. You tell it <strong style="color:var(--white)">where you are</strong> (your skills, courses, GPA) and <strong style="color:var(--white)">where you want to go</strong> (Software Engineer, Data Scientist, Biomedical Engineer…). STEMPath then calculates the <em style="color:var(--cyan); font-style:normal">fastest, cheapest, and most achievable route</em> to get you there.
       </p>
       <p style="color:#8fa0bb; margin-bottom:1.5rem; line-height:1.8;">
-        No more sifting through generic job advice. No more wondering if your degree is enough. STEMPath uses real industry data from O*NET, real course catalogs from platforms like edX, and a graph algorithm originally designed for navigation software — applied to your career.
+        No more sifting through generic job advice. No more guessing if your degree is enough.  STEMPath uses your career and course information to recommend personalized step-by-step pathways that help you reach your STEM career goals.
       </p>
-      <p style="color:#8fa0bb; line-height:1.8;">
-        Built for the Caribbean context, the platform accounts for regional labor markets, financial constraints, and varying educational backgrounds — making it the first career tool truly designed <em style="color:var(--teal); font-style:normal">for students like you</em>.
+      <p style="color:#8fa0bb; margin-bottom:1.5rem; line-height:1.8;">
+        Built for the Caribbean context, the platform accounts for regional and US labor markets, financial constraints and varying educational backgrounds. Therefore, making STEMPath a career guidance platform specially designed for <em style="color:var(--cyan); font-style:normal">you</em>.
+      </p>
+      <p style="color:#8fa0bb; margin-bottom:1.5rem; line-height:1.8;">
+         <em style="color:var(--cyan); font-style:normal">To the right is a STEMPath example  generated for an aspiring Data Scientist. ➡️</em>
       </p>
     </div>
 
     <div class="what-visual reveal">
-      <div style="font-family:'Space Mono',monospace; font-size:0.7rem; color:var(--purple-light); margin-bottom:1.2rem; opacity:0.7;">SAMPLE PATHWAY — Data Scientist</div>
+      <div style="font-family:'Space Mono',monospace; font-size:0.7rem; color:var(--purple-light); margin-bottom:1.2rem; opacity:0.7;">SAMPLE PATHWAY </div>
       <div class="path-demo">
         <div class="path-step">
           <span class="step-icon">📍</span>
           <div class="step-text">
-            <div class="step-title">Your Starting Point</div>
-            <div class="step-meta">Python basics · Statistics 1 · Calculus</div>
+            <div class="step-title">Step 1: Choose Your Target Career</div>
+            <div class="step-meta">Target Career: Data Scientist</div>
           </div>
-          <span class="step-badge">NOW</span>
+          
         </div>
         <div class="connector"></div>
         <div class="path-step">
           <span class="step-icon">📚</span>
           <div class="step-text">
-            <div class="step-title">Data Analysis Foundations</div>
-            <div class="step-meta">edX · 6 weeks · Free audit</div>
+            <div class="step-title">Step 2: Build Your Profile</div>
+            <div class="step-meta">Upload Credentials</div>
           </div>
-          <span class="step-badge">STEP 1</span>
+          
         </div>
         <div class="connector"></div>
         <div class="path-step">
           <span class="step-icon">🤖</span>
           <div class="step-text">
-            <div class="step-title">Machine Learning Fundamentals</div>
-            <div class="step-meta">Coursera · 10 weeks · $49</div>
+            <div class="step-title">Step 3: Complete Proficiency Quiz</div>
+            <div class="step-meta">Evaluation of Current Skills</div>
           </div>
-          <span class="step-badge">STEP 2</span>
+          
         </div>
         <div class="connector"></div>
         <div class="path-step">
           <span class="step-icon">🎯</span>
           <div class="step-text">
-            <div class="step-title">Google Data Analytics Certificate</div>
-            <div class="step-meta">Google · Industry-recognized · $200</div>
+            <div class="step-title">Step 4: View Pathway Results</div>
+            <div class="step-meta">Recommended Courses, Skills, Certifications, Videos and Job Listings</div>
           </div>
-          <span class="step-badge">GOAL</span>
+          
         </div>
       </div>
-      <div style="margin-top:1.5rem; padding-top:1.2rem; border-top:1px solid var(--purple-dim); display:flex; gap:2rem;">
-        <div>
-          <div style="font-family:'Space Mono',monospace; font-size:1.1rem; color:var(--purple-light);">26 wks</div>
-          <div style="font-size:0.72rem; color:var(--muted);">Total Time</div>
+      <div style="margin-top:1.5rem; padding-top:1.2rem; border-top:1px solid var(--purple-dim); display:flex; flex-direction:column; gap:1rem; align-items:center;">
+  
+        <!-- New centered label below the line -->
+        <div style="font-family:'Space Mono',monospace; font-size:0.8rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.1rem;">
+          Sample Profile
         </div>
-        <div>
-          <div style="font-family:'Space Mono',monospace; font-size:1.1rem; color:var(--amber);">~$249</div>
-          <div style="font-size:0.72rem; color:var(--muted);">Est. Cost</div>
-        </div>
-        <div>
-          <div style="font-family:'Space Mono',monospace; font-size:1.1rem; color:var(--purple-light);">94%</div>
-          <div style="font-size:0.72rem; color:var(--muted);">Skill Coverage</div>
+
+        <!-- Stats Grid -->
+        <div style="display:flex; gap:2rem; width:100%; justify-content:center; text-align: center;">
+          <div>
+            <div style="font-family:'Space Mono',monospace; font-size:1.1rem; color:var(--purple-light);text-transform:uppercase; letter-spacing:0.1rem;">26 wks</div>
+          
+            <div style="font-size:0.72rem; color:var(--muted);">Total Time</div>
+          </div>
+          <div>
+            <div style="font-family:'Space Mono',monospace; font-size:1.1rem; color:var(--amber);">~$249</div>
+            <div style="font-size:0.72rem; color:var(--muted);">Est. Cost</div>
+          </div>
+          <div>
+            <div style="font-family:'Space Mono',monospace; font-size:1.1rem; color:var(--purple-light);">94%</div>
+            <div style="font-size:0.72rem; color:var(--muted);">Skill Coverage</div>
+          </div>
         </div>
       </div>
     </div>
@@ -528,24 +542,24 @@
 <!-- HOW -->
 <section id="how" class="how-section">
   <div class="section-tag reveal">02 — How It Works</div>
-  <h2 class="reveal">From profile to pathway in four steps.</h2>
-  <p class="lead reveal">No complicated setup. Just tell STEMPath about yourself, and let the algorithm do the heavy lifting.</p>
+  <h2 class="reveal">From profile to pathway in 4 steps.</h2>
+  <p class="lead reveal" style="white-space: nowrap; overflow-wrap: normal;">No complicated setup. Just tell STEMPath about yourself and let the algorithm do the heavy lifting.</p>
 
   <div class="steps-grid">
     <div class="step-card reveal">
       <div class="step-num">01</div>
       <h3>Create Your Profile</h3>
-      <p>Register and enter your degree, completed courses, certifications, and current skills. Or simply upload your résumé — the system extracts your skills automatically.</p>
+      <p>Register and enter your degree, completed courses, certifications, and current skills. Or simply upload your resume the system extracts your skills automatically.</p>
     </div>
     <div class="step-card reveal" style="transition-delay:0.1s">
       <div class="step-num">02</div>
       <h3>Choose Your Target Career</h3>
-      <p>Browse 900+ STEM occupations — from Cybersecurity Analyst to Biomedical Engineer. Filter by category, search by keyword, and select the role you're aiming for.</p>
+      <p>Browse 900+ STEM occupations from Cybersecurity Analyst to Biomedical Engineer. Filter by category, search by keyword, and select the role you're aiming for.</p>
     </div>
     <div class="step-card reveal" style="transition-delay:0.2s">
       <div class="step-num">03</div>
       <h3>Take the Proficiency Quiz</h3>
-      <p>Answer 6 targeted questions about your chosen career's foundational skills. Your score determines your starting node in the learning graph — beginner or intermediate.</p>
+      <p>Answer 6 targeted questions about your chosen career's foundational skills. Your score determines your starting node in the learning graph beginner or intermediate.</p>
     </div>
     <div class="step-card reveal" style="transition-delay:0.3s">
       <div class="step-num">04</div>
@@ -581,7 +595,7 @@
     <div class="algo-text reveal" style="transition-delay:0.15s">
       <div class="section-tag">Under the Hood</div>
       <h2>The Science Behind the Suggestion</h2>
-      <p>STEMPath isn't guessing. It models your career journey as a <strong style="color:var(--white)">weighted directed graph</strong> — a mathematical structure used in mapping, logistics, and network routing — and applies <strong style="color:var(--white)">Dijkstra's shortest-path algorithm</strong> to find your optimal route.</p>
+      <p>STEMPath isn't guessing. It models your career journey as a <strong style="color:var(--white)">weighted directed graph.</strong> This is a mathematical structure used in mapping, logistics, and network routing . It also applies <strong style="color:var(--white)">Dijkstra's shortest-path algorithm</strong> to find your optimal route.</p>
       <p>Skills and certifications are <strong style="color:var(--white)">nodes</strong>. Courses are <strong style="color:var(--white)">edges</strong>. Time, cost, and difficulty are <strong style="color:var(--white)">weights</strong>. You choose how to optimize, and the algorithm guarantees the mathematically best path.</p>
       <div style="margin-top:1.5rem;">
         <span class="algo-pill">⚙ Dijkstra's Algorithm</span>
@@ -598,15 +612,15 @@
 <section id="why" style="background: var(--surface); padding: 7rem 5%;">
   <div style="text-align:center; margin-bottom:1rem;" class="reveal">
     <div class="section-tag" style="justify-content:center; display:block;">03 — Why Use STEMPath</div>
-    <h2>Built for students who can't afford to waste time.</h2>
-    <p class="lead" style="margin: 0.8rem auto 0; text-align:center;">Career uncertainty is expensive. STEMPath gives you clarity, direction, and a plan — before you spend a single dollar on a course that doesn't move you forward.</p>
+    <h2>Built for people who can't afford to waste time.</h2>
+    <p class="lead" style="margin: 0.8rem auto 0; text-align:center;">Career uncertainty is expensive. STEMPath gives you clarity, direction, and a plan before you spend a single dollar on a course that doesn't move you forward.</p>
   </div>
 
   <div class="why-grid">
     <div class="why-card reveal">
       <div class="why-icon">🎯</div>
       <h3>Personalized, Not Generic</h3>
-      <p>Forget one-size-fits-all advice. STEMPath analyzes your specific profile — your GPA, your completed courses, your skills — and builds a pathway unique to you, not a template for everyone.</p>
+      <p>Forget one-size-fits-all advice. STEMPath analyzes your specific profile, your GPA, your completed courses, your skills and builds a pathway unique to you.</p>
       <span class="tag">PERSONALIZATION</span>
     </div>
     <div class="why-card reveal" style="transition-delay:0.1s">
@@ -624,19 +638,19 @@
     <div class="why-card reveal" style="transition-delay:0.1s">
       <div class="why-icon">📡</div>
       <h3>Aligned with How Hiring Actually Works</h3>
-      <p>Over 81% of employers now prioritize skills over degrees. STEMPath maps directly to those skills using O*NET occupational data — the same database used by major employers and HR platforms worldwide.</p>
+      <p>Over 81% of employers now prioritize skills over degrees. STEMPath maps directly to those skills using O*NET occupational data. This is the same database used by major employers and HR platforms worldwide.</p>
       <span class="tag">SKILLS-BASED HIRING</span>
     </div>
     <div class="why-card reveal" style="transition-delay:0.2s">
       <div class="why-icon">📈</div>
       <h3>Track and Adapt as You Grow</h3>
-      <p>Mark courses as complete, watch your pathway progress percentage rise, and update your profile as you acquire new skills. STEMPath grows with you — not just a one-time report.</p>
+      <p>Mark courses as complete, watch your pathway progress percentage rise and update your profile as you acquire new skills. STEMPath grows with you, not just a one-time report.</p>
       <span class="tag">PROGRESS TRACKING</span>
     </div>
     <div class="why-card reveal" style="transition-delay:0.3s">
       <div class="why-icon">🔍</div>
       <h3>Transparent Recommendations</h3>
-      <p>STEMPath never gives you a black-box result. Every recommendation is explainable — you see exactly why each course appears in your pathway and what skill gap it closes.</p>
+      <p>STEMPath never gives you a black-box result. Every recommendation is explainable, you see exactly why each course appears in your pathway and what skill gap it closes.</p>
       <span class="tag">EXPLAINABLE AI</span>
     </div>
   </div>
@@ -645,9 +659,8 @@
 <!-- QUOTE -->
 <div class="quote-section reveal">
   <div class="quote-block">
-    <div class="quote-mark">"</div>
-    <p class="quote-text">Over 81% of employers now use skills-based hiring to prioritize competencies over credentials alone — yet most Caribbean students are left to navigate career planning alone, with fragmented information and no structured guidance.</p>
-    <p class="quote-source">— TestGorilla &amp; Burning Glass Institute, 2024 · The context STEMPath was built to solve</p>
+    <p class="quote-text">Over 81% of employers now use skills-based hiring to prioritize competencies over credentials alone yet most Caribbean people are left to navigate career planning alone, with fragmented information and no structured guidance.</p>
+    <p class="quote-source">· The context STEMPath was built to solve</p>
   </div>
 </div>
 
@@ -655,14 +668,14 @@
 <section class="cta-section">
   <div class="section-tag reveal" style="display:block; text-align:center;">Get Started</div>
   <h2 class="reveal">Ready to find your path?</h2>
-  <p class="reveal">STEMPath is free to explore. Build your profile, browse careers, and generate your first personalized learning pathway — in under 10 minutes.</p>
+  <p class="reveal">STEMPath is free to explore. Build your profile, browse careers, and generate your first personalized learning pathway in ample time.</p>
   <a href="https://github.com/ruthbak/STEMPath.git" target="_blank" class="btn-primary reveal">Explore on GitHub →</a>
 </section>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">STEMPath</div>
-  <div>Built by Rashene Dillon · Ruth Bakare · Antwon Fonglyewquee · Shari Oliver &nbsp;·&nbsp; UWI Mona, 2024</div>
+  <div>Built by Rashene Dillon · Ruth Bakare · Antwon Fonglyewquee · Shari Oliver &nbsp;·&nbsp; UWI Mona, 2026</div>
   <div>Supervised by Mr. Matthew Stone &nbsp;·&nbsp; <a href="https://github.com/ruthbak/STEMPath.git" target="_blank">GitHub ↗</a></div>
 </footer>
 
