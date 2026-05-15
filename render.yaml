@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: stempath-marketing-site
+    runtime: static
+    buildCommand: true
+    staticPublishPath: .
